@@ -128,3 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .vscode
+
+*.png
+flake.lock
+_build
+.envrc

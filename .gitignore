@@ -130,7 +130,6 @@ dmypy.json
 .vscode
 
 *.png
-flake.lock
 _build
 .envrc
 *.xlsx

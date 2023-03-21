@@ -133,3 +133,8 @@ dmypy.json
 _build
 .envrc
 *.xlsx
+projeto\ de\ ensino
+atividades
+.direnv
+.directory
+*.pdf

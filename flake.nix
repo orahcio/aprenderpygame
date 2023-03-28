@@ -15,15 +15,22 @@
     in rec {
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
-          python3
-          pandoc
+          # stdenv.cc.cc.lib
+          # SDL2
+          # xorg.libX11
+          (python3.withPackages(ps: with ps; [
+            jupyter
+            pygame
+          ]))
+          # virtualenv
         ];
         shellHook = ''
-          export PIP_PREFIX=$(pwd)/_build/pip_packages #Dir where built packages are stored
-          export PYTHONPATH="$PIP_PREFIX/${pkgs.python3.sitePackages}:$PYTHONPATH"
-          export PATH="$PIP_PREFIX/bin:$PATH"
-          unset SOURCE_DATE_EPOCH
-          source .venv/bin/activate
+          # export LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib/:${pkgs.xorg.libX11}/lib
+          # export PIP_PREFIX=$(pwd)/_build/pip_packages #Dir where built packages are stored
+          # export PYTHONPATH="$PIP_PREFIX/${pkgs.python3.sitePackages}:$PYTHONPATH"
+          # export PATH="$PIP_PREFIX/bin:$PATH"
+          # unset SOURCE_DATE_EPOCH
+          # source .venv/bin/activate
         '';
       };
     }

@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 .vscode
 
-*.png
 _build
 .envrc
 *.xlsx
@@ -138,3 +137,4 @@ atividades
 .direnv
 .directory
 *.pdf
+*.zip

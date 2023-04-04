@@ -22,6 +22,7 @@
             jupyter
             pygame
           ]))
+          pandoc
           # virtualenv
         ];
         shellHook = ''

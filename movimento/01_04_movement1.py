@@ -33,8 +33,8 @@ def main():
     pygame.display.set_caption("movement")
     
     # create a surface on screen that has the size of 240 x 180
-    screen_width = 240
-    screen_height = 180
+    screen_width = 800
+    screen_height = 640
     screen = pygame.display.set_mode((screen_width, screen_height))
     
     # load image (it is in same directory)
@@ -49,7 +49,7 @@ def main():
     screen.blit(bgd_image,(0,0)) # first background
     # instead of blitting the background image you could fill it 
     # (uncomment the next line to do so)
-    #screen.fill((255,0,0))
+    screen.fill((255,0,0))
     
     
     # define the position of the smily
@@ -95,6 +95,8 @@ def main():
         screen.blit(image, (xpos, ypos))
         # and update the screen (dont forget that!)
         pygame.display.flip()
+
+        screen.fill((255,0,0))
         
         # this will slow it down to 10 fps, so you can watch it, 
         # otherwise it would run too fast

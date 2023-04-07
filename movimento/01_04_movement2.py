@@ -49,7 +49,7 @@ def main():
     screen.blit(bgd_image,(0,0)) # first background
     # instead of blitting the background image you could fill it 
     # (uncomment the next line to do so)
-    #screen.fill((255,0,0))
+    screen.fill((255,0,0))
     
     
     # define the position of the smily
@@ -92,7 +92,8 @@ def main():
         ypos += step_y # move it down
         
         # first erase the screen (just blit the background over anything on screen)
-        screen.blit(bgd_image, (0,0))
+        # screen.blit(bgd_image, (0,0))
+        screen.fill((255,0,0))
         # now blit the smily on screen
         screen.blit(image, (xpos, ypos))
         # and update the screen (dont forget that!)

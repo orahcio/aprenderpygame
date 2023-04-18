@@ -12,21 +12,22 @@ AZUL = (0,0,255)
 FUNDO = (255,255,255)
 
 largura = 800
-altura = 600
+altura = 640
 
 def jogo_na_matrix():
 
     pygame.init()
     
-    buffer = pygame.display.set_mode((largura,altura))
+    tela = pygame.display.set_mode((largura,altura))
     relogio = pygame.time.Clock()
 
     # inicialmente a tela está em branco
-    tela = [[] for i in range(32)]
-    print(tela)
+    buffer = []
     for i in range(32):
-        tela[i] = [0 for j in range(40)]
-    print(len(tela[1]))
+        buffer.append([])
+        for j in range(40):
+            buffer[i].append(0)
+
 
     # Controle do snake
     controle = {
@@ -37,7 +38,7 @@ def jogo_na_matrix():
         }
 
     # snake começa no canto superior da tela
-    tela[0][0] = 1
+    buffer[0][0] = 1
     snake = [(0,0)]
     v = (1,0)
 
@@ -46,36 +47,50 @@ def jogo_na_matrix():
 
     while rodando:
         relogio.tick(15)
-        buffer.fill(FUNDO)
+        tela.fill(FUNDO)
         # apaga matriz
         for i in range(32):
             for j in range(40):
-                tela[i][j] = 0
+                buffer[i][j] = 0
 
-        for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                if event.key in controle:
-                    i,j = v
-                    il,jl = controle[event.key]
-                    e = i*il+j*jl
-                    e *= e
-                    v = (i-il)*e+il, (j-jl)*e+jl
-                    print(v)
+        for evento in pygame.event.get():
+            if evento.type == QUIT:
+                rodando = False
+            if evento.type == KEYDOWN:
+                if evento.key == K_ESCAPE:
+                    rodando = False
+                if evento.key == K_w and v[1]<=0:
+                    v = [0,-1]
+                if evento.key == K_s and v[1]>=0:
+                    v = [0,1]
+                if evento.key == K_d and v[0]>=0:
+                    v = [1,0]
+                if evento.key == K_a and v[0]<=0:
+                    v = [-1,0]
+                # if event.key in controle:
+                #     i,j = v
+                #     il,jl = controle[event.key]
+                #     e = i*il+j*jl
+                #     e *= e
+                #     v = (i-il)*e+il, (j-jl)*e+jl
+                #     print(v)
 
 
         # preenche o próximo passo
-        snake.append(((v[0]+snake[-1][0])%40,(v[1]+snake[-1][1])%32))
+        x = (v[0]+snake[-1][0])%40
+        y = (v[1]+snake[-1][1])%32
+        snake.append((x,y))
         # alterna = 0
 
         # desenhar a matriz conforme o snake
         for i,j in snake:
-            tela[j][i] = 1
+            buffer[j][i] = 1
         
-        # desenhar retângulos conforme a matriz tela
+        # desenhar retângulos conforme a matriz buffer
         for i in range(32):
             for j in range(40):
-                if tela[i][j] == 1:
-                    pygame.draw.rect(buffer,VERDE,((j%40)*20,(i%32)*20,20,20))
+                if buffer[i][j] == 1:
+                    pygame.draw.rect(tela,VERDE,(j*20,i*20,20,20))
         
         # limita o tamanho do snake
         if len(snake) > 4:
@@ -131,6 +146,7 @@ def main():
                     escalar = (x*xn+y*yn)/(s*s)
                     escalar *= escalar
                     v = (x-xn)*escalar+xn, (y-yn)*escalar+yn
+                    print(v)
         cabeca.move_ip(v)
         if (cabeca.x,cabeca.y) in cobra:
             rodando = False
@@ -154,5 +170,5 @@ def main():
 
 
 if __name__=="__main__":
-    main()
+    jogo_na_matrix()
     exit()

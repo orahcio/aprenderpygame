@@ -20,6 +20,7 @@
           # xorg.libX11
           (python3.withPackages(ps: with ps; [
             jupyter
+            jupyterlab
             pygame
           ]))
           pandoc

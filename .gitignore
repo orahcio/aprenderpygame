@@ -129,8 +129,12 @@ dmypy.json
 .pyre/
 .vscode
 
-*.png
-flake.lock
 _build
 .envrc
 *.xlsx
+projeto\ de\ ensino
+atividades
+.direnv
+.directory
+*.pdf
+*.zip

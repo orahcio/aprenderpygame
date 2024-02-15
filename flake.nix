@@ -19,6 +19,7 @@
           # SDL2
           # xorg.libX11
           (python3.withPackages(ps: with ps; [
+            pip
             jupyter
             jupyterlab
             pygame

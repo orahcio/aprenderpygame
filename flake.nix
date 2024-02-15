@@ -12,6 +12,19 @@
       pkgs = import nixpkgs {
         inherit system;
       };
+      pgzero = pkgs.python3Packages.buildPythonPackage rec {
+        propagatedBuildInputs = with pkgs.python3Packages;[
+          pygame
+        ];
+        pname = "pgzero";
+        version = "1.2.1";
+        format = "wheel";
+        url = "https://files.pythonhosted.org/packages/2c/66/bc46c203802d47fa30a6caa92d13392274bcbebbb9ffcd0c5ed8030b3611/pgzero-1.2.1-py3-none-any.whl";
+        src = pkgs.fetchurl { # pkgs.python311Packages.fetchPypi {
+          inherit url; # pname version;
+          sha256 = "734e1de1a99804c2610f90aa419411fc2b31200b9d683b6c9fc710c7a8e36606";
+        };
+      };
     in rec {
       devShell = pkgs.mkShell {
         buildInputs = with pkgs; [
@@ -23,6 +36,7 @@
             jupyter
             jupyterlab
             pygame
+            pgzero
           ]))
           pandoc
           # virtualenv

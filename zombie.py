@@ -31,12 +31,12 @@ class Boneco(Actor):
         self.image = self.images[int(self.index)]
 
 
-pumphead = Boneco('walk1',(170,CHAO))
+pumphead = Boneco('run__000',(170,CHAO))
 pumphead._rect = ZRect(50,CHAO,50,198)
 print(pumphead._rect)
 print(ZRect(100,CHAO,50,198))
-pumphead.images = [f'walk{i}' for i in range(1,11)]
-obstacles = [Actor('cactus',(700,CHAO+70))]
+pumphead.images = [f'run__00{i}' for i in range(3)]
+obstacles = [Actor('cactus',(700,CHAO+40))]
 game_over = False
 hit = False
 
@@ -46,7 +46,7 @@ def draw():
         screen.draw.text('Game Over', centerx=400, centery=270, color=(Color('White')), fontsize=60)
     else:
         screen.clear()
-        screen.draw.rect(pumphead._rect,Color('Red'))
+        # screen.draw.rect(pumphead._rect,Color('Red'))
         pumphead.draw()
         obstacles[0].draw()
 
@@ -58,11 +58,11 @@ def update():
     pumphead.update()
     
     for obs in obstacles:
-        obs.x -= 3
+        obs.x -= 4
         if obs.x < 0:
             obs.x = 820
         
-    hit = pumphead.collidelist_pixel(obstacles)
+    hit = pumphead.collidelist(obstacles)
     # print(hit)
     if hit != -1:
         game_over = True

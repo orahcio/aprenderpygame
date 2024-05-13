@@ -1,7 +1,7 @@
 # Escreva o seu código aqui :-)
 import pgzrun
 import random
-from pgzhelper import*
+# from pgzhelper import*
 
 #Fundo de Tela
 WIDTH = 800

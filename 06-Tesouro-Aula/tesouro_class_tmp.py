@@ -20,6 +20,25 @@ class Item(Actor):
         
 
 
+class Hero(Actor):
+    global WIDTH
+
+    vel = 7
+
+
+    def update(self):
+        if keyboard.left or keyboard.a:
+            ship.x -= self.vel
+            if ship.left < 0: # Parede à esquerda
+                ship.left = 0
+        if keyboard.right or keyboard.d:
+            ship.x += self.vel
+            if ship.right > WIDTH: # Parede à direita`
+                ship.right = WIDTH
+
+
+ship = Hero('ship', midbottom=(WIDTH/2,HEIGHT))
+
 coin = Item('coin')
 coin.set_pos()
 bomb = Item('bomb')
@@ -35,6 +54,7 @@ def draw():
         screen.blit('background',(0,0))
         coin.draw()
         bomb.draw()
+        ship.draw()
     
     else:
         screen.blit('background',(0,0))
@@ -47,3 +67,4 @@ def update():
     if not game_over:
         coin.update()
         bomb.update()
+        ship.update()

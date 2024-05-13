@@ -16,13 +16,13 @@
         propagatedBuildInputs = with pkgs.python311Packages; [ setuptools ansi2html libtmux weasyprint dataclass-wizard ];
         pname = "presenterm-export";
         version = "0.2.2";
-        format = "wheel";
-        # src = /home/orahcio/Projetos/presenterm-export; 
-        url = "https://files.pythonhosted.org/packages/d9/94/7446e2ca3a6a4f5f66acc50291115db06c440a803d0a19c18d614e0a22ba/presenterm_export-0.2.1-py3-none-any.whl";
-        src = pkgs.fetchurl { #fetchPypi {
-          inherit url; # pname version;
-          sha256 = "74b687d4682095d31d3f85536f79a8061d80de10d08ab581f2460c5fd33a0dad";
-        };
+        format = "pyproject";
+        src = /home/orahcio/Projetos/presenterm-export; 
+        # url = "https://files.pythonhosted.org/packages/d9/94/7446e2ca3a6a4f5f66acc50291115db06c440a803d0a19c18d614e0a22ba/presenterm_export-0.2.1-py3-none-any.whl";
+        # src = pkgs.fetchurl { #fetchPypi {
+          # inherit url; # pname version;
+          # sha256 = "74b687d4682095d31d3f85536f79a8061d80de10d08ab581f2460c5fd33a0dad";
+        # };
       };
 
       my_pyfxr = pkgs.python311Packages.buildPythonPackage rec {

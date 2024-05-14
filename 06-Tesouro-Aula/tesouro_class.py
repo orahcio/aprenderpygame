@@ -2,7 +2,7 @@ from random import randint
 # from pgzhelper import *
 
 
-class Hero2(Actor):
+class Hero(Actor):
     def __init__(self, image, pos=None, anchor=None, vel=7, life=3, **kwargs):
         super().__init__(image, pos, anchor, **kwargs)
         self.vel = vel
@@ -30,34 +30,7 @@ class Hero2(Actor):
             items.remove(item)
 
 
-class Hero(Actor):
-
-    vel = 7
-    life = 3
-    score = 0
-
-    def update(self):
-        if keyboard.left or keyboard.a:
-            ship.x -= self.vel
-            if ship.left < 0: # Parede à esquerda
-                ship.left = 0
-        if keyboard.right or keyboard.d:
-            ship.x += self.vel
-            if ship.right > WIDTH: # Parede à direita`
-                ship.right = WIDTH
-    
-
-    def collide(self, item, items, c=1):
-        if self.colliderect(item):
-            if c>0: self.score += c
-            else: self.life += c
-            item.set_pos()
-            item.som()
-            items.remove(item)
-
-
-
-class Item2(Actor):
+class Item(Actor):
     global HEIGHT
 
 
@@ -78,39 +51,13 @@ class Item2(Actor):
             self.midtop = randint(20,780), 0
 
 
-class Item(Actor):
-    global HEIGHT
-
-    vel = 7
-
-    def set_pos(self):
-        self.midtop = randint(20,780), 0
-
-    
-    def update(self):
-        self.y += self.vel
-        if self.bottom > HEIGHT:
-            self.set_pos()
-    
-
-    def set_sound(self, som):
-        self.som = som.play
-    
-
-    def create(self,som):
-        self.set_pos()
-        self.set_sound(som)
-
-
-
 WIDTH = 800
 HEIGHT = 600
 
-ship = Hero2('ship', midbottom=(WIDTH/2,HEIGHT))
+ship = Hero('ship', midbottom=(WIDTH/2,HEIGHT))
 
-coins = [Item2('coin', som=sounds.coleta)]
-
-bombs = [Item2('bomb', som=sounds.explosao)]
+coins = [Item('coin', som=sounds.coleta)]
+bombs = [Item('bomb', som=sounds.explosao)]
 
 game_over = False
 timeout = 0
@@ -145,15 +92,12 @@ def update():
 
         if timeout>100:
             timeout = 0
-            coins.append(Item2('coin', som=sounds.coleta))
-            # coins[-1].create(sounds.coleta)
+            coins.append(Item('coin', som=sounds.coleta))
             if len(bombs) < 3:
-                bombs.append(Item2('bomb', som=sounds.explosao))
-                # bombs[-1].create(sounds.explosao)
+                bombs.append(Item('bomb', som=sounds.explosao))
             else:
                 bombs.pop(0)
                 print(len(bombs))
-       
 
         for coin in coins:
             coin.update()

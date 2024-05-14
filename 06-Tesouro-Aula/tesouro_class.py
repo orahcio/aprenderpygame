@@ -132,9 +132,9 @@ def draw():
     
     else:
         screen.blit('background',(0,0))
-        screen.draw.text(f'Game Over', (400,300), fontname='pixel', color=(255,255,255), fontsize=30)
-        screen.draw.text(f'Pontos: {ship.score}', (370,350), fontname='pixel', color=(255,255,255), fontsize=15)
-        screen.draw.text(f'Vidas: {ship.life}', (370,370), fontname='pixel', color=(255,255,255), fontsize=15)
+        screen.draw.text(f'Game Over', center=(WIDTH/2,HEIGHT/2),\
+                         fontname='pixel', color=(255,255,255), fontsize=30)
+        screen.draw.text(f'Pontos: {ship.score}', center=(WIDTH/2,HEIGHT/2+35), fontname='pixel', color=(255,255,255), fontsize=15)
 
 
 def update():

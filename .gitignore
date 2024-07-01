@@ -138,3 +138,7 @@ atividades
 .directory
 *.pdf
 *.zip
+*.docx
+06*
+07*
+08*
